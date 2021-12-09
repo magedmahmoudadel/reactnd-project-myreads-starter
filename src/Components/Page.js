@@ -3,8 +3,17 @@ import {Link} from 'react-router-dom';
 import BookShelf from './BookShelf';
 
 
+
+
 class Page extends Component{
+   
+
+  
+    
     render(){
+      const currentlyReading=  this.props.books.filter(b=>b.shelf==='currentlyReading');
+      const wantToRead=  this.props.books.filter(b=>b.shelf==='wantToRead');
+      const read=  this.props.books.filter(b=>b.shelf==='read');
         return(
             <div className="list-books">
             <div className="list-books-title">
@@ -12,9 +21,9 @@ class Page extends Component{
             </div>
             <div className="list-books-content">
               <div>          
-                <BookShelf title='Currently Reading'/>
-                <BookShelf title='Want to Read'/>
-                <BookShelf title='Read'/>
+                <BookShelf title='Currently Reading' books={currentlyReading} updateShelf={this.props.updateShelf}/>
+                <BookShelf title='Want to Read' books={wantToRead} updateShelf={this.props.updateShelf}/>
+                <BookShelf title='Read' books={read} updateShelf={this.props.updateShelf}/>
               </div>
             </div>
             <div className="open-search">

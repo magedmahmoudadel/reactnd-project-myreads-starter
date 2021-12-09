@@ -7,21 +7,48 @@ import {Route} from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state={
-    books:[]
-  }
-
-  getBooks = async ()=>{
-    const allBooks =  await BooksAPI.getAll();
-    return this.setState(()=>({books:allBooks}))
+    books:[],
     
   }
+  updateShelf= async (e,book)=>{
+    try{
+      e.preventDefault();
+      const newShelf = e.target.value;
+      BooksAPI.update(book,newShelf).then(()=>{
+        BooksAPI.getAll().then((data) => {
+          this.setState(()=>({books:data}));
+          })
+      });
+    }catch(error){
+      console.log('Error:',error)
+    }
+    
+    }  
   
-  render() {
+  
+
+  async componentDidMount(){ // Updates the state with all the available books and categorizes according to their future shelves
+    const allBooks =  await BooksAPI.getAll();
+    this.setState(()=>({
+      books:allBooks      
+    }))  
+  }
+  
+  
+  render() {  
     return (
       <div className="app">
-        <Route exact path='/' render={()=>(<Page books={this.state.books} AllBooks={this.state.books}/>)}/>
+        <Route exact path='/' render={()=>
+          (<Page
+            books={this.state.books}
+            updateShelf={this.updateShelf}                      
+          />)}/>
 
-        <Route path='/search' render={()=>(<Search/>)}/>
+        <Route path='/search' render={()=>
+          (<Search
+            books={this.state.books}
+            updateShelf={this.updateShelf}
+          />)}/>
     
       </div>
     )

@@ -1,15 +1,16 @@
 import React,{Component} from 'react';
 
+
 class Book extends Component{
 
     render(){
-        
+        const image=this.props.imageLinks?this.props.imageLinks.thumbnail:'No Image';
         return(
             <div className="book">
                           <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.url})` }}></div>
+                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${image})` }}></div>
                             <div className="book-shelf-changer">
-                              <select>
+                              <select defaultValue={this.props.shelf} onChange={e=>{this.props.updateShelf(e,this.props,this.props.shelf)}}>
                                 <option value="move" disabled>Move to...</option>
                                 <option value="currentlyReading">Currently Reading</option>
                                 <option value="wantToRead">Want to Read</option>
