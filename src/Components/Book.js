@@ -4,7 +4,9 @@ import React,{Component} from 'react';
 class Book extends Component{
 
     render(){
-        const image=this.props.imageLinks?this.props.imageLinks.thumbnail:'No Image';
+        const image=this.props.imageLinks?this.props.imageLinks.thumbnail:'No image available';
+        const title=this.props.title?this.props.title:"No title available"
+        const authors=this.props.authors?this.props.authors:'No authors available';
         return(
             <div className="book">
                           <div className="book-top">
@@ -19,8 +21,8 @@ class Book extends Component{
                               </select>
                             </div>
                           </div>
-                          <div className="book-title">{this.props.title}</div>
-                          <div className="book-authors">{this.props.authors}</div>
+                          <div className="book-title">{title}</div>
+                          <div className="book-authors">{authors}</div>
             </div>
         )
     }

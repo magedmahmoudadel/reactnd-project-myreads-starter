@@ -9,33 +9,29 @@ class Search extends Component{
     searchResults:[]
   }
 
-  
+  bookQuery= (query)=>{
+    this.setState(()=>({
+      query:query
+    }))
+    this.searchBooks(query)
+  }
 
   searchBooks= (query)=>{
-    try{
+    
       BooksAPI.search(query).then((data)=>{
-        if(query){
+        if(query===''){
           this.setState(()=>({
-            query,
-            searchResults:data
-          }))   
-        }else{
-          this.setState(()=>({
-            query:'',
             searchResults:[]
           }))
-        }        
+        }else{
+          data.error?
+          this.setState(()=>({searchResults:[]}))
+          : this.setState(()=>({searchResults:data}))
+        }
       })         
      
-    }catch(error){
-      console.log("Error: ", error);
-      this.setState(()=>({
-        query:'',
-        searchResults:[]
-      }))
-      
     }
-  }
+  
 
 
     render(){
@@ -44,7 +40,12 @@ class Search extends Component{
               <div className="search-books-bar">
                 <Link className="close-search" to='/'>Close</Link>
                 <div className="search-books-input-wrapper">                
-                <input type="text" placeholder="Search by title or author" value={this.state.query} onChange={(e)=>{this.searchBooks(e.target.value)}}/>
+                <input 
+                  type="text" 
+                  placeholder="Search by title" 
+                  value={this.state.query} 
+                  onChange={(e)=>{this.bookQuery(e.target.value)}}
+                />
                 </div>
               </div>
             <div className="search-books-results">

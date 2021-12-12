@@ -10,7 +10,7 @@ class BooksApp extends React.Component {
     books:[],
     
   }
-  updateShelf= async (e,book)=>{
+  updateShelf= async (e,book)=>{ //Uses the update function from the BooksAPI to update the shelf property of a book then puts it on the proper shelf
     try{
       e.preventDefault();
       const newShelf = e.target.value;
