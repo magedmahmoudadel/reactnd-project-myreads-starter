@@ -1,5 +1,11 @@
 # MyReads Project
 
+## To Run the Project:
+
+- Open your console and cd into the project folder.
+- Type 'npm install' and wait for it to finish.
+- Type 'npm start' and the project should start in your default browser after a few seconds.
+
 ## Introduction:
 
 - This is the "MyReads" React app for udacity's react course. It contains 2 pages, the first simulates a library containing 3 shelves (Currently Reading, Want to Read, Read). The second is a search page wich searches the backend for books according to a query provided by the user (only certain search terms provided by udacity will work on this project).
